@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocean Drop Survival Simulation</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Dependencies -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <h1>Ocean Drop Simulation</h1>
+            <p>Simulating 5 years of daily random drops (1,825 days)</p>
+        </header>
+
+        <main>
+            <div id="map-container"></div>
+
+            <div id="stats-panel">
+                <div class="stat-card">
+                    <h3>Day</h3>
+                    <div id="day-count">0 / 1825</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Status</h3>
+                    <div id="status-indicator">Ready</div>
+                </div>
+                <div class="stat-card">
+                    <h3>On Land</h3>
+                    <div id="land-count">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Avg Temp</h3>
+                    <div id="avg-temp">-- °C</div>
+                </div>
+            </div>
+        </main>
+
+        <section id="legend">
+            <h3>Zone Definitions</h3>
+            <div class="legend-items">
+                <div class="legend-item"><span class="dot coastal"></span> Coastal: ≤1 km</div>
+                <div class="legend-item"><span class="dot shelf"></span> Shelf: ≤100 km</div>
+                <div class="legend-item"><span class="dot far"></span> Far: ≤300 km</div>
+                <div class="legend-item"><span class="dot deep"></span> Deep Ocean: &gt;300 km</div>
+            </div>
+        </section>
+
+        <section id="controls">
+            <button id="btn-start">Start Simulation</button>
+            <button id="btn-pause" disabled>Pause</button>
+            <button id="btn-reset">Reset</button>
+            <div class="control-group">
+                <label for="speed-slider">Speed</label>
+                <input type="range" id="speed-slider" min="1" max="100" value="50">
+            </div>
+        </section>
+
+        <section id="charts">
+            <div class="chart-container">
+                <h3>Temperature Distribution</h3>
+                <div id="chart-temp"></div>
+            </div>
+            <div class="chart-container">
+                <h3>Distance Zones</h3>
+                <div id="chart-dist"></div>
+            </div>
+        </section>
+
+        <section id="summary-stats">
+            <h3>Simulation Statistics</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Land Attempts Ratio</span>
+                    <span class="stat-value" id="stat-land-ratio">--</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Drops Within 1km</span>
+                    <span class="stat-value" id="stat-coastal-count">--</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Closest to Land</span>
+                    <span class="stat-value" id="stat-closest">--</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Farthest from Land</span>
+                    <span class="stat-value" id="stat-farthest">--</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Average Distance</span>
+                    <span class="stat-value" id="stat-avg-dist">--</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Avg Temperature</span>
+                    <span class="stat-value" id="stat-avg-temp">--</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Cold Water (&lt;4°C)</span>
+                    <span class="stat-value" id="stat-cold-pct">--</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Warm Water (&gt;24°C)</span>
+                    <span class="stat-value" id="stat-warm-pct">--</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="log-container">
+            <div class="log-header">
+                <h3>Event Log</h3>
+                <div class="sort-controls">
+                    <label>Sort by:</label>
+                    <button class="sort-btn active" data-sort="day">Day</button>
+                    <button class="sort-btn" data-sort="distance">Distance</button>
+                    <button class="sort-btn" data-sort="temp">Temp</button>
+                </div>
+            </div>
+            <ul id="event-log"></ul>
+        </section>
+    </div>
+
+    <script src="simulation.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
