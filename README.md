@@ -62,7 +62,7 @@ This bad boy is optimized for the edge.
 >
 > So I built an interactive engine to find out.
 > 
-> **You can now run the simulation yourself:** [INSERT_YOUR_URL]
+> **You can now run the simulation yourself:** https://ods.simenf.com
 >
 > **What it does:**
 > *   **Real-time Drops**: Watch as it teleports you to random coordinates on a high-res vector map.
@@ -71,5 +71,7 @@ This bad boy is optimized for the edge.
 > *   **Analyze the Data**: You can sort your drops by "Closest to Land" (hope!) or "Coldest Temp" (despair!).
 >
 > I used accurate geodesic math (Haversine) because if I'm going to freeze to death 2,000km from Chile, I want to know it's *exactly* 2,000km.
+>
+> Source code is available here if you want to check my math: https://github.com/simenf/Oceandropsimulator
 >
 > Let me know your "best" (closest to land) and "worst" (Point Nemo) drops in the comments!
